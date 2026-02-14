@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+"""
+elf2hex - Shakti-compatible ELF to Verilog readmemh hex converter.
+
+Usage: elf2hex WIDTH DEPTH INPUT.ELF BASE_ADDR [> OUTPUT.mem]
+  WIDTH     = bytes per word (4 or 8)
+  DEPTH     = max words to output
+  INPUT.ELF = RISC-V ELF file
+  BASE_ADDR = load base address (e.g. 2147483648 = 0x80000000)
+
+Output: hex words (one per line) suitable for Verilog readmemh and elf_to_header.c
+"""
+import sys
+import subprocess
+import struct
+import tempfile
+import os
+
+def main():
+    if len(sys.argv) != 5:
+        print(__doc__, file=sys.stderr)
+        sys.exit(1)
+
+    width = int(sys.argv[1])
+    depth = int(sys.argv[2])
+    elf_path = sys.argv[3]
+    base_addr = int(sys.argv[4])
+
+    if width not in (4, 8):
+        print("elf2hex: width must be 4 or 8", file=sys.stderr)
+        sys.exit(1)
+
+    # Use objcopy to extract loadable content as binary (stdout not reliable on all objcopy)
+    objcopy_candidates = ["riscv32-unknown-elf-objcopy", "riscv64-unknown-elf-objcopy"]
+    for objcopy in objcopy_candidates:
+        try:
+            with tempfile.NamedTemporaryFile(suffix=".bin", delete=False) as tmp:
+                tmp_path = tmp.name
+            subprocess.run(
+                [objcopy, "-O", "binary", elf_path, tmp_path],
+                capture_output=True,
+                check=True,
+            )
+            with open(tmp_path, "rb") as f:
+                data = f.read()
+            os.unlink(tmp_path)
+            break
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            continue
+    else:
+        print("elf2hex: objcopy failed (need riscv32/64-unknown-elf-objcopy)", file=sys.stderr)
+        sys.exit(1)
+
+    # Pad to word boundary
+    remainder = len(data) % width
+    if remainder:
+        data += b"\x00" * (width - remainder)
+
+    count = 0
+    for i in range(0, min(len(data), depth * width), width):
+        if count >= depth:
+            break
+        chunk = data[i : i + width]
+        if width == 4:
+            word = struct.unpack("<I", chunk)[0]
+        else:
+            word = struct.unpack("<Q", chunk)[0]
+        print(f"{word:0{width*2}x}")
+        count += 1
+
+if __name__ == "__main__":
+    main()

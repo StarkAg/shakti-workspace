@@ -1,0 +1,37 @@
+# Build outputs
+**/output/*.shakti
+**/output/*.riscv
+**/output/*.o
+**/output/*.dump
+**/output/*.hex
+**/output/*.bin
+**/output/*.mem
+**/output/flashdata.h
+**/output/elf_to_header
+**/output/deploy.*
+**/output/code.mem
+**/output/output.bin
+**/output/*.txt
+**/gen_lib/*.o
+**/gen_lib/*.a
+*.elf
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Shakti SDK nested .git (we track SDK as part of this repo)
+# shakti-sdk/.git is removed when adding; we keep SDK content
+
+# Exclude shakti-tools (2.7GB; students build toolchain or get libgcc separately)
+shakti-tools/
+
+# Local overrides
+.env
+*.local
