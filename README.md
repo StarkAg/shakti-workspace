@@ -2,6 +2,8 @@
 
 A professional development environment for the Shakti RISC-V processor family, combining the SDK, toolchain, and development tools in a unified workspace.
 
+**Mac M4 / Apple Silicon?** → See [docs/MAC_M4_SETUP.md](docs/MAC_M4_SETUP.md) for full setup.
+
 ## Workspace Structure
 
 ```
