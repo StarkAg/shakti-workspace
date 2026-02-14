@@ -46,7 +46,18 @@ This guide takes you from a fresh Mac M4 (no VM, no tools) to a fully working Sh
 | **RAM** | 8 GB minimum (6 GB for VM) |
 | **Disk** | ~50 GB free |
 | **Network** | Internet for downloads |
-| **Lab hardware** | Arty A7 FPGA (for flashing at lab) |
+| **Lab hardware** | Arty A7 FPGA (pre-flashed with Shakti bitstream) |
+
+### Why a “Fresh” FPGA Isn’t Enough
+
+- A brand-new Arty A7 has **no FPGA design loaded**.
+- The Shakti core (RISC-V processor) must first be **built and downloaded** using Vivado.
+- Vivado is **x86 only** and heavy; it **doesn’t run on Mac/Apple Silicon**.
+- So students usually don’t do this themselves—it’s done **once per board** by lab staff or course admins.
+
+### What You Actually Need
+
+- **Pre-flashed Arty A7:** Board already configured with the Shakti bitstream (lab boards are normally like this).
 
 ---
 
