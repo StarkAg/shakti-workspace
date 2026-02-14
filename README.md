@@ -82,7 +82,7 @@ For debugging with OpenOCD, UART, and GDB:
 
 The official ACAD guide uses VirtualBox on Ubuntu. **VirtualBox does not run on Apple Silicon.** Use this substitute.
 
-> **Full setup guide for future students**: See **[docs/MAC_M4_SETUP.md](docs/MAC_M4_SETUP.md)** for the complete step-by-step Mac M4 setup.
+> **Full setup guide for future students**: See **[docs/MAC_M4_SETUP.md](docs/MAC_M4_SETUP.md)** or **[docs/SHAKTI_MAC_M4_FULL_GUIDE.pdf](docs/SHAKTI_MAC_M4_FULL_GUIDE.pdf)** (PDF) for the complete step-by-step Mac M4 setup.
 
 ### Option A: UTM + Ubuntu ARM64 (Recommended for labs)
 

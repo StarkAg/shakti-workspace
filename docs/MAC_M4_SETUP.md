@@ -1,6 +1,8 @@
 # Shakti RISC-V Setup Guide: MacBook M4 / Apple Silicon
 
-A complete step-by-step guide for ACAD students on Mac M4 to set up the Shakti RISC-V development environment for lab work. The official guide uses VirtualBox + Ubuntu, but **VirtualBox does not run on Apple Silicon**. This document describes the verified substitute using **UTM + Ubuntu ARM64**.
+A complete step-by-step guide for ACAD students on Mac M4 to set up the Shakti RISC-V development environment for lab work.
+
+> **PDF version:** [SHAKTI_MAC_M4_FULL_GUIDE.pdf](SHAKTI_MAC_M4_FULL_GUIDE.pdf) – Full guide from zero to lab-ready. The official guide uses VirtualBox + Ubuntu, but **VirtualBox does not run on Apple Silicon**. This document describes the verified substitute using **UTM + Ubuntu ARM64**.
 
 ---
 
